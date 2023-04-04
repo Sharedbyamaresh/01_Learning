@@ -48,6 +48,7 @@ class pattern
     void print_floyd_traingle()
     {
         int cnt=1;
+        //  triangle with numbered pattern
         for (int i = 0; i<number_row; i++)
         {
             
@@ -107,6 +108,127 @@ class pattern
    
     }
 
+    void printinvertednumberedpattern(int n)
+    {
+        //  print first row. assing row as n because we want a inverted traingle
+        for (int row=n;  row != 0; row--)
+        {
+            for (int col=0; col != row ; col ++)
+            {
+                cout << col + 1;
+            }
+            cout << endl;
+        }
+    }
+
+    void print_binary_pattern(int n)
+    {
+        int cnt =1;   // dummy variable to print 1 and 0;
+        for (int row=0;row != n; row++)
+        {   cnt = row %2;  // assign starting binary number based on no. of zeros and 1
+            for (int col=0;col <= row; col++)
+            {
+                cout << (cnt%2);
+                cnt++;
+            }
+            cout << endl;
+        }
+
+    }
+    //    ***
+    //   ***
+    //  ***
+    void print_rhombus_Patter(int n)
+    {
+        for (int row=0;row<n;row++)
+        {
+            for (int spc=n-row;spc !=0;spc --)
+            {
+                cout << " ";
+            }
+            for (int col=0;col<n;col++)
+            {
+                cout << "*";
+            }
+            cout << endl;
+        }
+    }
+
+    //   1
+    //  1  2
+    //1  2  3
+    void print_numbered_pattern(int n)
+    {
+        for (int row=1;row <= n;row++)
+        {
+            for (int spc=0;spc <= n-row;spc++)
+            {
+                cout << " ";
+            }
+            for (int col=1;col<=row;col++)
+            {
+                cout << col << " ";
+            }
+            cout << endl;
+        }
+    }
+//  print pallindromic pattern
+//    1
+//   212
+//  32123
+    void pallindromic_pattern(int n)
+    {
+        for (int row=1;row<=n;row++)
+        {
+            for (int spc=1;spc <= n-row;spc++)
+            {
+                cout << " ";
+            }
+
+            for (int col=row; col >=1;col--)
+            {
+                cout << col;
+            }
+            for (int col = 2; col <=row ;col++)
+            {
+                cout << col;
+            }
+            cout << endl;
+        }
+    }
+
+    // Star Pattern
+    //   *
+    //  ***
+    // *****
+
+    void print_strpattern(int n)
+    {
+        for (int row=0;row<n;row++)
+        {   
+            for(int spc=0;spc<n-row;spc++)
+            {
+                cout << " ";
+            }
+            for (int col=0;col<2*row+1;col++)
+            {
+                cout << "*";
+            }
+            cout << endl;
+        }
+        for (int row=n-1;row>=0;row--)
+        {   
+            for(int spc=0;spc<n-row;spc++)
+            {
+                cout << " ";
+            }
+            for (int col=0;col<2*row+1;col++)
+            {
+                cout << "*";
+            }
+            cout << endl;
+        }
+    }
 };
 
 
@@ -119,7 +241,13 @@ int main()
     // obj.print_numbered_half_pyramid();
     // obj.print_numbered_half_pyramid_inverted();
     // obj.print_floyd_traingle();
-    obj.print_butterfly_pattern(4);
+    // obj.print_butterfly_pattern(4);
+    // obj.printinvertednumberedpattern(4);
+    // obj.print_binary_pattern(5);
+   // obj.print_rhombus_Patter(5);
+//    obj.print_numbered_pattern(5);
+    //   obj.pallindromic_pattern(5);
+      obj.print_strpattern(5);
 
 
     
