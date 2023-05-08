@@ -229,6 +229,38 @@ class pattern
             cout << endl;
         }
     }
+
+    // Zig Zag Pattern
+    //  *     *
+    // *  *  *  *
+    //*    *     *
+    // No of row always fixed at 3. Row and Col starts with 1 always.
+    // stars are present when sum of row and col are 4
+    // only for rows two, if col no. is divisible by 4 then we will print stars
+    void print_zigzag_pattern(int n)
+    {
+        for (int row=1;row<4;row++)
+        {
+        for (int col=1;col<=n;col++)
+        {
+            if((row+col) %4 ==0)
+            {
+                cout<<"*";
+            }
+            else if(row==2 && col %4==0)
+            {
+                cout << "*";
+            }
+            else
+            {
+                cout << " ";
+            }
+        }
+        cout << endl;
+        }
+
+    }
+    
 };
 
 
@@ -247,7 +279,8 @@ int main()
    // obj.print_rhombus_Patter(5);
 //    obj.print_numbered_pattern(5);
     //   obj.pallindromic_pattern(5);
-      obj.print_strpattern(5);
+    //  obj.print_strpattern(5);
+      obj.print_zigzag_pattern(20);
 
 
     
