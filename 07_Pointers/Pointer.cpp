@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <iostream>
-
+#include "dos.h"
 using namespace std;
 
 void fun(int **);
@@ -88,6 +88,24 @@ int main()
     cout << j1 << endl;
     // arr2d_ptr[0]=test;
     cout << 1["AmareshMandal"] << endl;
+    int a_t=1,*ptr1;
+    char ch='c';
+    void *ptr2;
+    ptr1 = &a_t;
+    ptr2 = ptr1;
+    ptr2 = &ch;
+    ptr2 = ptr1;
+
+    char a1[]="Visual C++";
+    char *temp_ptr=a1;
+    char **b=&temp_ptr;
+
+    cout << "Char Ptr" << endl;
+    cout << sizeof(a1) << " " << sizeof(b)<<endl;
+    cout << sizeof(*a1) << " " << sizeof(*b)<<endl;
+    *(*(b)+1) = 'j';
+    cout << *(*(b)+1) << endl;
+    // ptr1 = &ch;
     
 }
 int test(int a, int b)
@@ -103,3 +121,25 @@ void fun(int **k)
     
     *k=&a;
 }
+
+
+// double factorial(double fct_no)
+// {
+//   double sum = 1;
+//   for(i=1;i<=fct_no;i++)
+//   {
+//     sum = sum*i;
+//   }
+//   return sum;
+// }
+
+// int main()
+// {
+//   double (fptr*)(double);
+//   fptr = &factorial(fct_no);
+//   double fct_value = *fptr;
+//   return 0;
+// }
+
+
+// //5*4*3*2*1

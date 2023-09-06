@@ -1,6 +1,7 @@
 #include "iostream"
 #include<stdio.h>
 #include<stdint.h>
+#include<climits>
 
 #include<stdlib.h>
 
@@ -131,12 +132,67 @@ class ArraySearchAlgorithm
         return max_i;
     }
 
+    int Max_SubarraySum_CummulativeMethod(int arr[], int arr_len)
+    {
+        int cum_sum[arr_len + 1];
+        cum_sum[0]=0;
+
+        for (int i=1;i<=arr_len;i++)
+        {
+            cum_sum[i]=cum_sum[i-1] + arr[i-1];
+            cout << cum_sum[i] << endl;
+        }
+
+        
+        int maxSum=INT_MIN;
+
+        for (int i=1;i<=arr_len;i++)
+        {
+            int sum_curr=0;
+            for (int j=0;j<=i;j++)
+            {
+                sum_curr = cum_sum[i] - cum_sum[j];
+                cout << "sum_curr=" << sum_curr <<endl;
+
+                if(sum_curr >= maxSum)
+                {
+                    maxSum=sum_curr;
+                }
+
+            }
+        }
+        cout << "From Method MaxSubarraySum= ";
+        cout << maxSum << endl;
+        
+        return maxSum;
+    }
+    
+    int Max_SubarraySum_KadaneAlg(int arr[],int arr_len)
+    {
+        int Curr_Sum=0;
+        int maxSum=0;
+
+        for (int i=0; i< arr_len ; i++)
+        {
+            Curr_Sum += arr[i];
+            if(Curr_Sum <0)
+            {
+                Curr_Sum=0;
+            }
+
+            maxSum=max(maxSum,Curr_Sum);
+        }
+
+        cout<<"MaxSum_Subarray_Kadanes=" << maxSum << endl;
+        return 1;
+    }
+
 };
 
 int main ()
 {
     // int arr[5]={20,10,67,78,1};
-    int arr[5]={-5,-1,-3,2,1};
+    int arr[5]={-1,4,-6,5,2};
     // int arr[6]={12,45,23,51,19,8};
     int *ptr;
     ArraySearchAlgorithm Obj;
@@ -153,6 +209,8 @@ int main ()
     //     ptr++;
     // }
 
-    cout<< Obj.MaxTill_I(arr,5,3);   // i th element starts from 0
+    // cout<< Obj.MaxTill_I(arr,5,3);   // i th element starts from 0
+    cout << Obj.Max_SubarraySum_CummulativeMethod(arr,5);
+    Obj.Max_SubarraySum_KadaneAlg(arr,5);
 
 }

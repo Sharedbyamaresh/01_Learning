@@ -9,6 +9,10 @@ void LargestArithmeticArray(int arr[],int size);
 void GlobalMaximaOnIncomingData(int arr[],int size);
 void FirstRepeatElementSmallestIndex(int arr[],int );
 void FindSubarrayofGivenSum(int arr[],int ,int );
+void FindMaxSubarraySum(int arr[],int size);
+int FindMaxSubarraySum_Kadanes_Alg(int arr[],int len);
+int FindMaxCircularSubarraySum(int arr[],int len);
+int FindSumOfPairs(int arr[], int len, int req_sum);
 
 
 int main()
@@ -20,7 +24,7 @@ int main()
     // GlobalMaximaOnIncomingData(arr,arr_len);
     // FirstRepeatElementSmallestIndex(arr,arr_len);
 
-    int arr[5]={1,0,3,7,5};
+    int arr[5]={4,6,8,11,12};
     int arr_len=5;
     int i=1,j;
     char str[20]="Amaresh Mandal";
@@ -34,11 +38,14 @@ int main()
     cout << in + in + in << endl;
     cout << 3*in <<endl;
     cout << "IN=" <<(in++ + in++) << endl;
-
+    cout << 8[str] << endl;
     // cout << (i>10 ? "%-50s" : "%-30s",str);
     // cout << "I am Here %-30s",str;
    
-    FindSubarrayofGivenSum(arr,5,5);
+    // FindSubarrayofGivenSum(arr,5,5);
+    // FindMaxSubarraySum_Kadanes_Alg(arr,arr_len);
+    // FindMaxCircularSubarraySum(arr,arr_len);
+    cout << FindSumOfPairs(arr,arr_len,13);
 }
 
 void sum_of_subarray(int arr[],int arr_len)
@@ -311,4 +318,118 @@ void FindSubarrayofGivenSum(int arr[],int arr_len, int Sum_Value)
     cout << "En at the end :" << En << endl;
     cout << "St at the end :" << St << endl;
     }   
+
+
+}
+
+
+void FindMaxSubarraySum (int arr[],int len)
+{
+
+    int maxSum= INT_MIN;
+    int curr_sum=0;
+
+
+    for (int start_idx=0; start_idx < len; start_idx++)
+    {
+        for (int end_idx=start_idx; end_idx <len; end_idx++ )
+        {
+            for (int sum_idx=start_idx; sum_idx <= end_idx; sum_idx++)
+            {
+                curr_sum =+ arr[sum_idx];
+            }
+
+            maxSum=max(maxSum,curr_sum);
+            curr_sum=0;
+        }
+    }
+
+    cout << "Max SubArray Sum" << maxSum << endl;
+   
+}
+
+
+int FindMaxSubarraySum_Kadanes_Alg(int arr[], int len)
+{
+    int maxSum=INT_MIN;
+    int curr_sum=0;
+    int cumm_sum_arr[len]={0};
+    cumm_sum_arr[0]=0;
+
+    for (int start_idx=0; start_idx < len ; start_idx++)
+    {
+        curr_sum += arr[start_idx];
+        cout << curr_sum << endl;
+        if(curr_sum < 0)
+        {
+            cumm_sum_arr[start_idx] = 0;
+            curr_sum=0;
+        }
+        
+        cumm_sum_arr[start_idx ] = curr_sum;
+        maxSum=max(curr_sum,maxSum);
+
+        cout << "cummlative[" << start_idx << "] = " << cumm_sum_arr[start_idx ] << endl;
+        
+    }
+
+    // for (int idx=0;idx<len;idx++)
+    // {
+    //     maxSum=max(maxSum,cumm_sum_arr[idx]);
+    // }
+
+    cout << "Max Sum Kadanes = " << maxSum << endl; 
+    return(maxSum);
+
+}
+
+int FindMaxCircularSubarraySum(int arr[],int len)
+{
+    int maxSum=INT_MIN,Sum_Arr=0;
+    int maxSum_wrap=INT_MIN;
+
+    int inv_arr[len]={};
+    
+    for (int idx=0; idx<len; idx++)
+    {
+        inv_arr[idx]= -arr[idx];
+        Sum_Arr += arr[idx];
+    }
+
+    maxSum_wrap=FindMaxSubarraySum_Kadanes_Alg(inv_arr,len);
+    maxSum=max(FindMaxSubarraySum_Kadanes_Alg(arr,len),(Sum_Arr + maxSum_wrap));  // since the non contributng element will be negate of the actual one so arr_sum - (-non contributing element) will end up to arr_sum + non_contributing element
+
+    cout <<"Max Circular Subarray Sum=" << maxSum << endl;
+    // for (int i=0;i<8;i++)
+    // {
+    //     cout << inv_arr[i] << endl;
+    // }
+    // cout << maxSum_wrap<<endl;
+    return(maxSum);
+}
+
+int FindSumOfPairs(int arr[],int len, int req_sum)
+{
+    // assuming the arr[] is an sorted array. If its not then sort the array.
+
+    int st=0,en=len-1;
+
+    while(st<en)
+    {
+        if(arr[st] + arr[en] == req_sum)
+        {
+            cout << st << " " << en << endl;
+            return 1;
+        }
+        else if(arr[st] + arr[en] > req_sum)
+        {
+            en--;
+        }
+        else
+        {
+            st++;
+        }
+    }
+
+    return 0;
 }

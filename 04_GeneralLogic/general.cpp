@@ -60,7 +60,27 @@ int main()
     struct A AA;
     cout<<sizeof(AA)<<endl;
     
+    cout << "Test Char Array" << endl;
+    char ch[]="ARRAY";
+    char *p= "array";
+    cout << ch << endl;
+    cout << *p << endl;
+    cout << 3+"Amaresh" << endl;
+    char str1[]="Hello";
+    char str2[]="Hello";
+    int int_arr[5]={1,2,3,4,5};
+    cout << *(3 + int_arr) << endl;
 
+    // Size of Stiring and Character Constants
+    cout << "Size of String and Character Constants" << endl;
+    cout << sizeof('A') << endl;
+    cout << sizeof("A") << endl;
+
+    // Sizeof Operators in string
+    cout << "Sizeof Operators in string" << endl;
+    char *str[]={"Amaresh","Mandal"};
+    cout << sizeof(str) << endl;
+    cout << str << endl;
     
     return 1;
 }
